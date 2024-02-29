@@ -1,25 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://q2php0b5m6as"]
+[gd_scene load_steps=6 format=3 uid="uid://q2php0b5m6as"]
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="2_lvpnv"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2tdc"]
+albedo_color = Color(0.145098, 0.423529, 0.635294, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_p85yc"]
-size = Vector2(10.095, 10.205)
+material = SubResource("StandardMaterial3D_f2tdc")
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_8r53f"]
-map_width = 13
-map_depth = 14
-map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+map_width = 3
+map_depth = 3
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q0mcv"]
 
 [node name="A-Very-Normal-Weekend-Getaway" type="Node3D"]
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="Ground" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("PlaneMesh_p85yc")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("HeightMapShape3D_8r53f")
 
 [node name="Player" type="CharacterBody3D" parent="."]
@@ -31,3 +36,10 @@ shape = SubResource("CapsuleShape3D_q0mcv")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6.40902, 9.27071, -9.06949)
+light_energy = 20.0
+light_size = 0.262
+spot_range = 14.905
+spot_angle = 35.91
